@@ -44,9 +44,6 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public GroupDto updateGroup(GroupDto groupDto) {
        Group existingGroup = groupRepo.findById(groupDto.id()).orElseThrow(() -> new RuntimeException("Группа с ID: " + groupDto.id() + "не найдена"));
-      // existingGroup.setTeacher(groupDto.teacher());
-      // existingGroup.setName(groupDto.name());
-       //existingGroup.setAgeGroup(groupDto.ageGroup());
 
        Group updated = groupRepo.save(existingGroup);
         return GroupMapper.INSTANCE.groupToGroupDto(updated);

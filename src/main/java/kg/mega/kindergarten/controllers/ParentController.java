@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("api/parent")
 public class ParentController implements CRUDOperations<ParentDto, ParentCreateDto,Long>{
     private final ParentService parentService;
 

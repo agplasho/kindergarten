@@ -41,10 +41,7 @@ public class ParentServiceImpl implements ParentService {
     @Override
     public ParentDto updateParent(ParentDto parentDto) {
         Parent existingParent = parentRepo.findById(parentDto.id()).orElseThrow(() -> new RuntimeException("Родитель с таким ID не найден"));
-        //existingParent.setFirstName(parentDto.firstName());
-        //  existingParent.setLastName(parentDto.lastName());
-        // existingParent.setContact(parentDto.contact());
-        //  existingParent.setRole(parentDto.role());
+
         Parent updated = parentRepo.save(existingParent);
         return ParentMapper.INSTANCE.parentToParentDto(updated);
     }

@@ -2,12 +2,9 @@ package kg.mega.kindergarten.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import kg.mega.kindergarten.mappers.ChildMapper;
-import kg.mega.kindergarten.models.Child;
 import kg.mega.kindergarten.models.dtos.ChildCreateDto;
 import kg.mega.kindergarten.models.dtos.ChildDto;
 import kg.mega.kindergarten.services.ChildService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

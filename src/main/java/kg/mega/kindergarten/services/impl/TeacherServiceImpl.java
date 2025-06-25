@@ -44,10 +44,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherDto updateTeacher(TeacherDto teacherDto) {
         Teacher existingTeacher = teacherRepo.findById(teacherDto.id()).orElseThrow(() -> new RuntimeException("Учитель с таким ID не найден"));
-        // existingTeacher.setFirstName(teacherDto.firstName());
-        // existingTeacher.setLastName(teacherDto.lastName());
-        // existingTeacher.setContact(teacherDto.teacherContact());
-        // existingTeacher.setPosition(teacherDto.position());
+
         Teacher updated = teacherRepo.save(existingTeacher);
         return TeacherMapper.INSTANCE.teacherToTeacherDto(updated);
     }

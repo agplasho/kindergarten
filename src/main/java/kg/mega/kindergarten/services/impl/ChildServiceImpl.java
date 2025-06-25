@@ -42,9 +42,6 @@ public class ChildServiceImpl implements ChildService {
     @Override
     public ChildDto updateChild(ChildDto childDto) {
         Child existingChild = childRepo.findById(childDto.Id()).orElseThrow(() -> new RuntimeException("Ребенок с ID :" + childDto.Id() + "не найден"));
-       // existingChild.setFirstName(childDto.firstName());
-       // existingChild.setLastName(childDto.lastName());
-       // existingChild.setGroup(childDto.group());
 
         Child updated = childRepo.save(existingChild);
         return ChildMapper.INSTANCE.childToChildDto(updated);

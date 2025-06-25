@@ -9,7 +9,7 @@ public record TeacherDto(
         String lastName,
         String email,
         TeacherPosition position,
-        Contact teacherContact
+        Contact contact
 
 ) {
 }

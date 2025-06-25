@@ -18,9 +18,13 @@ public class Group {
     @ManyToOne
     @JoinColumn(name = " teacher_id")
     Teacher teacher;
+    @ManyToOne
+    @JoinColumn(name = "assistant_id")
+    Teacher assistant;
     String name;
     @ManyToOne
     @JoinColumn(name = "age_group_id", nullable = false)
     AgeGroup ageGroup;
+    private boolean isActive = true;
 
 }

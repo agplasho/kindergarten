@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/group")
+@RequestMapping("/api/group")
 public class GroupController implements CRUDOperations<GroupDto, GroupCreateDto, Long> {
 
     private final GroupService groupService;

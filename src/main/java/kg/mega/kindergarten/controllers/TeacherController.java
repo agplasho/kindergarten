@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/teacher")
+@RequestMapping("/api/teacher")
 public class TeacherController implements CRUDOperations<TeacherDto, TeacherCreateDto,Long>{
 
     private final TeacherService teacherService;
