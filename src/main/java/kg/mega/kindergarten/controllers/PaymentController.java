@@ -2,7 +2,6 @@ package kg.mega.kindergarten.controllers;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import kg.mega.kindergarten.models.dtos.PaymentCreateDto;
-import kg.mega.kindergarten.models.dtos.PaymentDto;
 import kg.mega.kindergarten.services.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +19,14 @@ public class PaymentController {
     public ResponseEntity<?> createPayment(@RequestBody PaymentCreateDto paymentCreateDto) {
         return ResponseEntity.ok(paymentService.createPaymentByChild(paymentCreateDto));
     }
+
     @GetMapping("/get_payment_by_child_id{childId}")
-    public ResponseEntity<?> getPaymentByChild(@PathVariable Long childId){
+    public ResponseEntity<?> getPaymentByChild(@PathVariable Long childId) {
         return ResponseEntity.ok(paymentService.getPaymentByChildId(childId));
     }
+
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deletePayment(@RequestParam Long paymentId){
+    public ResponseEntity<?> deletePayment(@RequestParam Long paymentId) {
         return ResponseEntity.ok(paymentService.deletePayment(paymentId));
     }
 

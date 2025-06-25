@@ -2,10 +2,8 @@ package kg.mega.kindergarten.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import kg.mega.kindergarten.mappers.ParentMapper;
-import kg.mega.kindergarten.mappers.TeacherMapper;
 import kg.mega.kindergarten.models.dtos.ParentCreateDto;
 import kg.mega.kindergarten.models.dtos.ParentDto;
-import kg.mega.kindergarten.models.dtos.TeacherDto;
 import kg.mega.kindergarten.services.ParentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/parent")
-public class ParentController implements CRUDOperations<ParentDto, ParentCreateDto,Long>{
+public class ParentController implements CRUDOperations<ParentDto, ParentCreateDto, Long> {
     private final ParentService parentService;
 
     public ParentController(ParentService parentService) {
@@ -24,7 +22,7 @@ public class ParentController implements CRUDOperations<ParentDto, ParentCreateD
     @Operation(summary = "Создание родителя")
     @Override
     public ParentDto create(@RequestBody ParentCreateDto parentCreateDto) {
-        return parentService.createParent(parentCreateDto );
+        return parentService.createParent(parentCreateDto);
     }
 
     @GetMapping("/read")
@@ -38,7 +36,7 @@ public class ParentController implements CRUDOperations<ParentDto, ParentCreateD
     @Operation(summary = "Получить список всех родителей ")
     @Override
     public List<ParentDto> readAll(@RequestParam int page, @RequestParam int size) {
-        return parentService.findAllParentsById(page,size).stream().map(ParentMapper.INSTANCE::parentToParentDto).toList();
+        return parentService.findAllParentsById(page, size).stream().map(ParentMapper.INSTANCE::parentToParentDto).toList();
     }
 
     @PutMapping("/update")

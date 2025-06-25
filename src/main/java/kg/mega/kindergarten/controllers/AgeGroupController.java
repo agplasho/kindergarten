@@ -6,8 +6,6 @@ import kg.mega.kindergarten.mappers.AgeGroupMapper;
 import kg.mega.kindergarten.models.dtos.AgeGroupCreateDto;
 import kg.mega.kindergarten.models.dtos.AgeGroupDto;
 import kg.mega.kindergarten.services.AgeGroupService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

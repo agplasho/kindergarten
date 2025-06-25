@@ -1,7 +1,6 @@
 package kg.mega.kindergarten.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import kg.mega.kindergarten.mappers.ParentMapper;
 import kg.mega.kindergarten.mappers.TeacherMapper;
 import kg.mega.kindergarten.models.dtos.TeacherCreateDto;
 import kg.mega.kindergarten.models.dtos.TeacherDto;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/teacher")
-public class TeacherController implements CRUDOperations<TeacherDto, TeacherCreateDto,Long>{
+public class TeacherController implements CRUDOperations<TeacherDto, TeacherCreateDto, Long> {
 
     private final TeacherService teacherService;
 
@@ -28,6 +27,7 @@ public class TeacherController implements CRUDOperations<TeacherDto, TeacherCrea
     public TeacherDto create(@RequestBody TeacherCreateDto teacherCreateDto) {
         return teacherService.createTeacher(teacherCreateDto);
     }
+
     @GetMapping("/read")
     @Operation(summary = "Получить учителя по ID")
     @Override
@@ -39,7 +39,7 @@ public class TeacherController implements CRUDOperations<TeacherDto, TeacherCrea
     @Operation(summary = "Получить список всех учителей")
     @Override
     public List<TeacherDto> readAll(@RequestParam int page, @RequestParam int size) {
-        return teacherService.findAllTeachersById(page,size).stream().map(TeacherMapper.INSTANCE::teacherToTeacherDto).toList();
+        return teacherService.findAllTeachersById(page, size).stream().map(TeacherMapper.INSTANCE::teacherToTeacherDto).toList();
     }
 
     @PutMapping("/update")
