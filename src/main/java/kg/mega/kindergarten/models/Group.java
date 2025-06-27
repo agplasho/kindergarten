@@ -1,6 +1,7 @@
 package kg.mega.kindergarten.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,10 +22,11 @@ public class Group {
     @ManyToOne
     @JoinColumn(name = "assistant_id")
     Teacher assistant;
+    @NotBlank(message = "Имя не должно быть пустым")
     String name;
     @ManyToOne
     @JoinColumn(name = "age_group_id", nullable = false)
     AgeGroup ageGroup;
-    private boolean isActive = true;
+    boolean isActive = true;
 
 }

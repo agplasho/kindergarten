@@ -1,6 +1,7 @@
 package kg.mega.kindergarten.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import kg.mega.kindergarten.enums.PaymentType;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,9 +23,12 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "child_id", nullable = false)
     Child child;
+    @Positive(message = "Сумма должна быть положительной")
     double paymentSum;
     LocalDateTime paymentDate;
     String period;
     @Enumerated(EnumType.STRING)
     PaymentType paymentType;
+
+    boolean active = true;
 }

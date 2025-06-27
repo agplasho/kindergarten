@@ -1,6 +1,7 @@
 package kg.mega.kindergarten.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Child extends Human {
     @ManyToOne
     @JoinColumn(name = "group_id")
     Group group;
+    @Past
     LocalDate birthDate;
 
     @ManyToMany

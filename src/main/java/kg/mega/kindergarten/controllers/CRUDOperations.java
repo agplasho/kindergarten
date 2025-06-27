@@ -1,18 +1,20 @@
 package kg.mega.kindergarten.controllers;
 
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public interface CRUDOperations<DTO,CDTO, ID> {
-    @PostMapping
-     DTO create(@RequestBody CDTO cdto);
-    @GetMapping
-    DTO read(@PathVariable ID id);
-    @GetMapping("/list")
-    List<DTO> readAll(@RequestParam int page, @RequestParam int size);
-    @PutMapping
-    DTO update(@RequestBody DTO dto);
-    @DeleteMapping
-    boolean delete(@RequestParam ID id);
+public interface CRUDOperations<DTO,CDTO, UDTO> {
+    @PostMapping("/create")
+    DTO create(@Valid @RequestBody CDTO dto);
+    @PutMapping("/update")
+    DTO update(@PathVariable Long id, @Valid @RequestBody UDTO updatedDto);
+    @DeleteMapping("/delete")
+    ResponseEntity<?> delete(@RequestParam Long id);
+    @GetMapping("/getList")
+    List<DTO> allList(@RequestParam int page, @RequestParam int size);
+    @GetMapping("/findById")
+    DTO findById(@RequestParam Long id);
 }

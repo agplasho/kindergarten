@@ -2,72 +2,56 @@ package kg.mega.kindergarten.controllers;
 
 
 import io.swagger.v3.oas.annotations.Operation;
-import kg.mega.kindergarten.mappers.AgeGroupMapper;
 import kg.mega.kindergarten.models.dtos.AgeGroupCreateDto;
 import kg.mega.kindergarten.models.dtos.AgeGroupDto;
+import kg.mega.kindergarten.models.dtos.AgeGroupUpdateDto;
 import kg.mega.kindergarten.services.AgeGroupService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/ageGroup")
-public class AgeGroupController implements CRUDOperations<AgeGroupDto, AgeGroupCreateDto, Long> {
-
+public class AgeGroupController implements CRUDOperations<AgeGroupDto, AgeGroupCreateDto, AgeGroupUpdateDto> {
     private final AgeGroupService ageGroupService;
-
 
     public AgeGroupController(AgeGroupService ageGroupService) {
         this.ageGroupService = ageGroupService;
-
     }
 
     @PostMapping("/create")
     @Operation(summary = "Создание возрастной группы")
     @Override
-    public AgeGroupDto create(@RequestBody AgeGroupCreateDto ageGroupCreateDto) {
-        return ageGroupService.createAgeGroup(ageGroupCreateDto);
+    public AgeGroupDto create(AgeGroupCreateDto ageGroupCreateDto) {
+        return ageGroupService.create(ageGroupCreateDto);
     }
 
-
-    @GetMapping("/read")
-    @Operation(summary = "Получить возрастную группу по ID")
+    @PutMapping("/age-group/update/{ageGroupId}")
+    @Operation(summary = "Обновление группы по id")
     @Override
-    public AgeGroupDto read(@PathVariable Long id) {
-        return AgeGroupMapper.INSTANCE.ageGroupToAgeGroupDto(ageGroupService.findAgeGroupById(id));
+    public AgeGroupDto update(@PathVariable Long ageGroupId, AgeGroupUpdateDto ageGroupUpdateDto) {
+        return ageGroupService.updateAgeGroupById(ageGroupId, ageGroupUpdateDto);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Получить все возрастные группы")
+    @DeleteMapping("/delete/{ageGroupId}")
+    @Operation(summary = "Удаление группы", description = "Удаление группы, путем установки false на поле Active")
     @Override
-    public List<AgeGroupDto> readAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        return ageGroupService.findAllAgeGroupById(page, size);
+    public ResponseEntity<?> delete(Long ageGroupId) {
+        return ageGroupService.deleteAgeGroupById(ageGroupId);
     }
 
-    @PutMapping("/update")
-    @Operation(summary = "Обновить возрастную группу")
+    @GetMapping("/get/all")
+    @Operation(summary = "Получение всех возрастных групп")
     @Override
-    public AgeGroupDto update(AgeGroupDto ageGroupDto) {
-        return ageGroupService.updateAgeGroup(ageGroupDto);
+    public List<AgeGroupDto> allList(int page, int size) {
+        return ageGroupService.getAllAgeGroups(page, size);
     }
 
-    @DeleteMapping("/delete")
-    @Operation(summary = "Удалить возрастную группу")
+    @GetMapping("/get/{id}")
+    @Operation(summary = "Получение возрастной группы по Id")
     @Override
-    public boolean delete(Long id) {
-        return ageGroupService.deleteAgeGroup(id);
+    public AgeGroupDto findById(@PathVariable Long id) {
+        return ageGroupService.findAgeGroupByIdAndReturnDto(id);
     }
-
-
-//    @DeleteMapping("/{id}")
-//    @Operation(summary = "Удалить возрастную группу по ID")
-//    public ResponseEntity<?> deleteAgeGroup(@PathVariable Long id) {
-//        boolean isDeleted = ageGroupService.delete(id);
-//
-//        if (isDeleted) {
-//            return ResponseEntity.ok("Возрастная группа успешно удалена.");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Возрастная группа не найдена.");
-//        }
-//    }
 }

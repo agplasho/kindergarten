@@ -1,17 +1,17 @@
 package kg.mega.kindergarten.models.dtos;
 
+import jakarta.validation.constraints.Positive;
 import kg.mega.kindergarten.enums.TeacherPosition;
-import kg.mega.kindergarten.models.Contact;
 
 import java.time.LocalDate;
 
-public record TeacherDto(
-        Long id,
+public record TeacherUpdateDto(
         String firstName,
         String lastName,
         LocalDate dateOfBirth,
+        @Positive
+        Long contactId,
         TeacherPosition position,
-        Contact contact,
         boolean active
 
 ) {

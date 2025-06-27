@@ -4,68 +4,55 @@ import io.swagger.v3.oas.annotations.Operation;
 import kg.mega.kindergarten.mappers.ChildMapper;
 import kg.mega.kindergarten.models.dtos.ChildCreateDto;
 import kg.mega.kindergarten.models.dtos.ChildDto;
+import kg.mega.kindergarten.models.dtos.ChildUpdateDto;
 import kg.mega.kindergarten.services.ChildService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/child")
-public class ChildController implements CRUDOperations<ChildDto, ChildCreateDto, Long> {
+public class ChildController implements CRUDOperations<ChildDto, ChildCreateDto, ChildUpdateDto> {
 
     private final ChildService childService;
 
     public ChildController(ChildService childService) {
         this.childService = childService;
-
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Добавить ребенка")
+    @Operation(summary = "Создание ребенка")
     @Override
-    public ChildDto create(@RequestBody ChildCreateDto childCreateDto) {
-        return childService.createChild(childCreateDto);
+    public ChildDto create(ChildCreateDto childCreateDto) {
+        return childService.create(childCreateDto);
     }
 
-
-    @GetMapping("{id}")
-    @Operation(summary = "Найти ребенка по ID")
+    @PutMapping("/update/{childId}")
+    @Operation(summary = "Обновление информации ребенка")
     @Override
-    public ChildDto read(@PathVariable Long id) {
-        return ChildMapper.INSTANCE.childToChildDto(childService.findChildById(id));
+    public ChildDto update(@PathVariable Long childId, ChildUpdateDto childUpdateDto) {
+        return childService.update(childId, childUpdateDto);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Посмотреть список всех детей")
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Удаление информации о ребенке")
     @Override
-    public List<ChildDto> readAll(@RequestParam int page, @RequestParam int size) {
-        return childService.findAllChildrenById(page, size).stream().map(ChildMapper.INSTANCE::childToChildDto).toList();
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return childService.deleteById(id);
     }
 
-    @PutMapping("/update")
-    @Operation(summary = "Обновить информацию о ребенке")
+    @GetMapping("/get/all")
+    @Operation(summary = "Получение списка всех детей")
     @Override
-    public ChildDto update(ChildDto childDto) {
-        return childService.updateChild(childDto);
+    public List<ChildDto> allList(int page, int size) {
+        return childService.getAll(page, size);
     }
 
-
-    @DeleteMapping("/delete")
-    @Operation(summary = "Удалить ребенка по ID")
+    @GetMapping("/get/{id}")
+    @Operation(summary = "Поиск ребенка по id")
     @Override
-    public boolean delete(Long id) {
-        return childService.deleteChild(id);
+    public ChildDto findById(@PathVariable Long id) {
+        return childService.findByIdAndReturnDto(id);
     }
-
-//    @DeleteMapping("/{id}")
-//    @Operation(summary = "Удалить Ребенка по ID")
-//    public ResponseEntity<?> deleteChild(@PathVariable Long id) {
-//        boolean isDeleted = childService.deleteChild(id);
-//
-//        if (isDeleted) {
-//            return ResponseEntity.ok("Ребенок успешно удален");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ребенок не найден");
-//        }
-//    }
 }

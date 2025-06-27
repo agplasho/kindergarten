@@ -1,6 +1,8 @@
 package kg.mega.kindergarten.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import kg.mega.kindergarten.enums.TeacherPosition;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,7 +25,10 @@ public class Teacher extends Human {
     @OneToOne
     @JoinColumn(name = "contact_id", nullable = false)
     Contact contact;
+    @Past
+    @JsonFormat(pattern = "dd.MM.yyyy")
     LocalDate dateOfBirth;
+    boolean active = true;
 
 
 }

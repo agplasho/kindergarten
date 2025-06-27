@@ -4,14 +4,17 @@ import io.swagger.v3.oas.annotations.Operation;
 import kg.mega.kindergarten.mappers.ParentMapper;
 import kg.mega.kindergarten.models.dtos.ParentCreateDto;
 import kg.mega.kindergarten.models.dtos.ParentDto;
+import kg.mega.kindergarten.models.dtos.ParentUpdateDto;
 import kg.mega.kindergarten.services.ParentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/parent")
-public class ParentController implements CRUDOperations<ParentDto, ParentCreateDto, Long> {
+public class ParentController implements CRUDOperations<ParentDto, ParentCreateDto, ParentUpdateDto> {
+
     private final ParentService parentService;
 
     public ParentController(ParentService parentService) {
@@ -21,35 +24,36 @@ public class ParentController implements CRUDOperations<ParentDto, ParentCreateD
     @PostMapping("/create")
     @Operation(summary = "Создание родителя")
     @Override
-    public ParentDto create(@RequestBody ParentCreateDto parentCreateDto) {
-        return parentService.createParent(parentCreateDto);
+    public ParentDto create(ParentCreateDto parentCreateDto) {
+        return parentService.create(parentCreateDto);
     }
 
-    @GetMapping("/read")
-    @Operation(summary = "Получить родителя по ID")
+    @PutMapping("/update/{parentId}")
+    @Operation(summary = "Обновление родителя")
     @Override
-    public ParentDto read(@PathVariable Long id) {
-        return ParentMapper.INSTANCE.parentToParentDto(parentService.findParentById(id));
+    public ParentDto update(@PathVariable Long parentId, ParentUpdateDto parentUpdateDto) {
+        return parentService.update(parentId, parentUpdateDto);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Получить список всех родителей ")
+    @DeleteMapping("/delete/ {id}")
+    @Operation(summary = "Удаление родителя")
     @Override
-    public List<ParentDto> readAll(@RequestParam int page, @RequestParam int size) {
-        return parentService.findAllParentsById(page, size).stream().map(ParentMapper.INSTANCE::parentToParentDto).toList();
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return parentService.deleteById(id);
     }
 
-    @PutMapping("/update")
-    @Operation(summary = "Обновить родителя")
+    @GetMapping("/get/all")
+    @Operation(summary = "Получение всех родителей")
     @Override
-    public ParentDto update(ParentDto parentDto) {
-        return parentService.updateParent(parentDto);
+    public List<ParentDto> allList(int page, int size) {
+        return parentService.findAll(page, size);
     }
 
-    @DeleteMapping("/delete")
-    @Operation(summary = "Удалить Родителя по ID")
+
+    @GetMapping("/get/{parentId}")
+    @Operation(summary = "Получение родителя по id")
     @Override
-    public boolean delete(Long id) {
-        return parentService.deleteParentById(id);
+    public ParentDto findById(@PathVariable Long parentId) {
+        return parentService.findById(parentId);
     }
 }

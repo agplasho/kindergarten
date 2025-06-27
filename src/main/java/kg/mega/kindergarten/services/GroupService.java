@@ -4,17 +4,27 @@ import aj.org.objectweb.asm.commons.Remapper;
 import kg.mega.kindergarten.models.Group;
 import kg.mega.kindergarten.models.dtos.GroupCreateDto;
 import kg.mega.kindergarten.models.dtos.GroupDto;
+import kg.mega.kindergarten.models.dtos.GroupUpdateDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface GroupService {
-    GroupDto createGroup(GroupCreateDto groupCreateDto);
+    GroupDto create(GroupCreateDto groupCreateDto);
 
-    Group findGroupById(Long id);
+    Group findById(Long groupId);
 
-    List<Group> findAllGroupsById(int page, int size);
+    GroupDto update(Long id, GroupUpdateDto updatedDto);
 
-    GroupDto updateGroup(GroupDto groupDto);
+    ResponseEntity<?> delete(Long id);
 
-    boolean deleteGroup(Long id);
+    List<GroupDto> getAll(int page, int size);
+
+    GroupDto findByIdAndReturnDto(Long id);
+
+    GroupDto addTeacherToGroup(Long groupId, Long teacherId);
+
+    GroupDto addAssistantToGroup(Long groupId, Long assistandId);
+
+    GroupDto addChildToGroup(Long groupId, Long childId);
 }

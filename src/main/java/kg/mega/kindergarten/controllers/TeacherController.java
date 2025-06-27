@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import kg.mega.kindergarten.mappers.TeacherMapper;
 import kg.mega.kindergarten.models.dtos.TeacherCreateDto;
 import kg.mega.kindergarten.models.dtos.TeacherDto;
+import kg.mega.kindergarten.models.dtos.TeacherUpdateDto;
 import kg.mega.kindergarten.services.TeacherService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/teacher")
-public class TeacherController implements CRUDOperations<TeacherDto, TeacherCreateDto, Long> {
+public class TeacherController implements CRUDOperations<TeacherDto, TeacherCreateDto, TeacherUpdateDto> {
 
     private final TeacherService teacherService;
 
@@ -20,39 +22,39 @@ public class TeacherController implements CRUDOperations<TeacherDto, TeacherCrea
         this.teacherService = teacherService;
     }
 
-
     @PostMapping("/create")
     @Operation(summary = "Создание учителя")
     @Override
     public TeacherDto create(@RequestBody TeacherCreateDto teacherCreateDto) {
-        return teacherService.createTeacher(teacherCreateDto);
+        return teacherService.create(teacherCreateDto);
     }
 
-    @GetMapping("/read")
-    @Operation(summary = "Получить учителя по ID")
+    @PutMapping("/update/{teacherId}")
+    @Operation(summary = "Обновление учителя")
     @Override
-    public TeacherDto read(@PathVariable Long id) {
-        return TeacherMapper.INSTANCE.teacherToTeacherDto(teacherService.findTeacherById(id));
+    public TeacherDto update(@PathVariable Long teacherId, TeacherUpdateDto teacherUpdateDto) {
+        return teacherService.update(teacherId, teacherUpdateDto);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Получить список всех учителей")
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Удаление учителя")
     @Override
-    public List<TeacherDto> readAll(@RequestParam int page, @RequestParam int size) {
-        return teacherService.findAllTeachersById(page, size).stream().map(TeacherMapper.INSTANCE::teacherToTeacherDto).toList();
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return teacherService.delete(id);
     }
 
-    @PutMapping("/update")
-    @Operation(summary = "Обновить учителя")
+    @GetMapping("/get/all")
+    @Operation(summary = "Получение списка всех учителей по страницам")
     @Override
-    public TeacherDto update(TeacherDto teacherDto) {
-        return teacherService.updateTeacher(teacherDto);
+    public List<TeacherDto> allList(int page, int size) {
+        return teacherService.getAllTeachers(page, size);
     }
 
-    @DeleteMapping("/delete")
-    @Operation(summary = "Удалить учителя")
+
+    @GetMapping("/get/{teacherId}")
+    @Operation(summary = "Поиск учителя по id")
     @Override
-    public boolean delete(Long id) {
-        return teacherService.deleteTeacherById(id);
+    public TeacherDto findById(@PathVariable Long teacherId) {
+        return teacherService.findByIdAndReturnDto(teacherId);
     }
 }

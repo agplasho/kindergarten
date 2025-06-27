@@ -6,8 +6,10 @@ import kg.mega.kindergarten.models.Teacher;
 public record GroupDto (
      Long id,
      Teacher teacher,
+     Teacher assistant,
      String name,
-     AgeGroup ageGroup
+     AgeGroup ageGroup,
+     boolean active
 )
     {
 

@@ -3,18 +3,23 @@ package kg.mega.kindergarten.services;
 import kg.mega.kindergarten.models.Parent;
 import kg.mega.kindergarten.models.dtos.ParentCreateDto;
 import kg.mega.kindergarten.models.dtos.ParentDto;
+import kg.mega.kindergarten.models.dtos.ParentUpdateDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 import java.util.List;
 
 public interface ParentService {
-    ParentDto createParent(ParentCreateDto parentCreateDto);
+    ParentDto create(ParentCreateDto parentCreateDto);
 
-    Parent findParentById(Long id);
+    List<Parent> findParentByIds(List<Long> parentsIds);
 
-    List<Parent> findAllParentsById(int page, int size);
+    ParentDto findById(Long parentId);
 
-    ParentDto updateParent(ParentDto parentDto);
 
-    boolean deleteParentById(Long id);
+    List<ParentDto> findAll(int page, int size);
+
+    ResponseEntity<?> deleteById(Long id);
+
+    ParentDto update(Long parentId, ParentUpdateDto parentUpdateDto);
 }

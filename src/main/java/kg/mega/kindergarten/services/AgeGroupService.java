@@ -4,17 +4,22 @@ import kg.mega.kindergarten.mappers.AgeGroupMapper;
 import kg.mega.kindergarten.models.AgeGroup;
 import kg.mega.kindergarten.models.dtos.AgeGroupCreateDto;
 import kg.mega.kindergarten.models.dtos.AgeGroupDto;
+import kg.mega.kindergarten.models.dtos.AgeGroupUpdateDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface AgeGroupService {
-    AgeGroupDto createAgeGroup(AgeGroupCreateDto ageGroupCreateDto);
 
-    AgeGroup findAgeGroupById(Long id);
+    AgeGroupDto create(AgeGroupCreateDto ageGroupCreateDto);
 
-    List<AgeGroupDto> findAllAgeGroupById(int page, int size);
+    AgeGroup findById(Long aLong);
 
-    AgeGroupDto updateAgeGroup(AgeGroupDto ageGroupDto);
+    AgeGroupDto updateAgeGroupById(Long ageGroupId, AgeGroupUpdateDto ageGroupUpdateDto);
 
-    boolean deleteAgeGroup(Long id);
+    ResponseEntity<?> deleteAgeGroupById(Long ageGroupId);
+
+    List<AgeGroupDto> getAllAgeGroups(int page, int size);
+
+    AgeGroupDto findAgeGroupByIdAndReturnDto(Long id);
 }

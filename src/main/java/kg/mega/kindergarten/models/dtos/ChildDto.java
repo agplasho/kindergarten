@@ -1,20 +1,20 @@
 package kg.mega.kindergarten.models.dtos;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import kg.mega.kindergarten.models.Group;
+import kg.mega.kindergarten.models.Parent;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public record ChildDto(
-        Long Id,
+        Long id,
         String firstName,
         String lastName,
-        @Min(3)
-        @Max(6)
-        int age,
-        @NotNull
-        Group group
+        String patronymic,
+        LocalDate dateOfBirth,
+        Group group,
+        List<Parent> parents,
+        boolean active
 
 ) {
 

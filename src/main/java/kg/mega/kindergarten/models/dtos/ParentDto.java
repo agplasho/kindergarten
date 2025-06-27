@@ -8,6 +8,7 @@ public record ParentDto(
         String firstName,
         String lastName,
         ParentRole role,
-        Contact contact
+        Contact contact,
+        boolean active
 ) {
 }
