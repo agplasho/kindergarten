@@ -20,36 +20,36 @@ public class AgeGroupController implements CRUDOperations<AgeGroupDto, AgeGroupC
         this.ageGroupService = ageGroupService;
     }
 
-    @PostMapping("/create")
+
     @Operation(summary = "Создание возрастной группы")
     @Override
     public AgeGroupDto create(AgeGroupCreateDto ageGroupCreateDto) {
         return ageGroupService.create(ageGroupCreateDto);
     }
 
-    @PutMapping("/age-group/update/{ageGroupId}")
-    @Operation(summary = "Обновление группы по id")
+
+    @Operation(summary = "Обновить группу по ID")
     @Override
     public AgeGroupDto update(@PathVariable Long ageGroupId, AgeGroupUpdateDto ageGroupUpdateDto) {
         return ageGroupService.updateAgeGroupById(ageGroupId, ageGroupUpdateDto);
     }
 
-    @DeleteMapping("/delete/{ageGroupId}")
-    @Operation(summary = "Удаление группы", description = "Удаление группы, путем установки false на поле Active")
+
+    @Operation(summary = "Удалить группу")
     @Override
     public ResponseEntity<?> delete(Long ageGroupId) {
         return ageGroupService.deleteAgeGroupById(ageGroupId);
     }
 
-    @GetMapping("/get/all")
-    @Operation(summary = "Получение всех возрастных групп")
+
+    @Operation(summary = "Получить все возрастные группы")
     @Override
     public List<AgeGroupDto> allList(int page, int size) {
         return ageGroupService.getAllAgeGroups(page, size);
     }
 
-    @GetMapping("/get/{id}")
-    @Operation(summary = "Получение возрастной группы по Id")
+
+    @Operation(summary = "Получение возрастной группы по ID")
     @Override
     public AgeGroupDto findById(@PathVariable Long id) {
         return ageGroupService.findAgeGroupByIdAndReturnDto(id);

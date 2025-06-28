@@ -21,39 +21,39 @@ public class PaymentController implements CRUDOperations<PaymentDto, PaymentCrea
         this.paymentService = paymentService;
     }
 
-    @PostMapping ("/create")
-    @Operation(summary = "Создание транзакции", description = "Создание транзакции для ребенка")
+
+    @Operation(summary = "Создать транзакцию для ребенка" )
     @Override
     public PaymentDto create(PaymentCreateDto paymentCreateDto) {
         return paymentService.create (paymentCreateDto);
     }
 
 
-    @PutMapping ("/update/{paymentId}")
-    @Operation (summary = "Обновление оплаты")
+
+    @Operation (summary = "Обновить оплату")
     @Override
     public PaymentDto update(@PathVariable Long paymentId, PaymentUpdateDto paymentUpdateDto) {
         return paymentService.update (paymentId,paymentUpdateDto);
     }
 
 
-    @DeleteMapping ("/delete")
-    @Operation (summary = "Удаление оплаты")
+
+    @Operation (summary = "Удалить оплату")
     @Override
     public ResponseEntity<?> delete(Long id) {
         return paymentService.deletePaymentById (id);
     }
 
-    @GetMapping ("/get/all")
-    @Operation (summary = "Получение всех оплат", description = "Получение всех оплат постранично")
+
+    @Operation (summary = "Получить список оплат")
     @Override
     public List<PaymentDto> allList(int page, int size) {
         return paymentService.getAllPayments (page, size);
     }
 
 
-    @GetMapping ("/get/{id}")
-    @Operation (summary = "Поиск оплаты по id")
+
+    @Operation (summary = "Найти оплату по ID")
     @Override
     public PaymentDto findById(@RequestParam Long paymentId) {
         return paymentService.findPaymentById (paymentId);

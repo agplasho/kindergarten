@@ -21,37 +21,37 @@ public class ParentController implements CRUDOperations<ParentDto, ParentCreateD
         this.parentService = parentService;
     }
 
-    @PostMapping("/create")
+
     @Operation(summary = "Создание родителя")
     @Override
     public ParentDto create(ParentCreateDto parentCreateDto) {
         return parentService.create(parentCreateDto);
     }
 
-    @PutMapping("/update/{parentId}")
-    @Operation(summary = "Обновление родителя")
+
+    @Operation(summary = "Обновить информацию о родителе")
     @Override
     public ParentDto update(@PathVariable Long parentId, ParentUpdateDto parentUpdateDto) {
         return parentService.update(parentId, parentUpdateDto);
     }
 
-    @DeleteMapping("/delete/ {id}")
-    @Operation(summary = "Удаление родителя")
+
+    @Operation(summary = "Удалить информацию о родителе")
     @Override
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return parentService.deleteById(id);
     }
 
-    @GetMapping("/get/all")
-    @Operation(summary = "Получение всех родителей")
+
+    @Operation(summary = "Получить список всех родителей")
     @Override
     public List<ParentDto> allList(int page, int size) {
         return parentService.findAll(page, size);
     }
 
 
-    @GetMapping("/get/{parentId}")
-    @Operation(summary = "Получение родителя по id")
+
+    @Operation(summary = "Получить родителя по ID")
     @Override
     public ParentDto findById(@PathVariable Long parentId) {
         return parentService.findById(parentId);

@@ -21,36 +21,36 @@ public class ChildController implements CRUDOperations<ChildDto, ChildCreateDto,
         this.childService = childService;
     }
 
-    @PostMapping("/create")
+
     @Operation(summary = "Создание ребенка")
     @Override
     public ChildDto create(ChildCreateDto childCreateDto) {
         return childService.create(childCreateDto);
     }
 
-    @PutMapping("/update/{childId}")
+
     @Operation(summary = "Обновление информации ребенка")
     @Override
     public ChildDto update(@PathVariable Long childId, ChildUpdateDto childUpdateDto) {
         return childService.update(childId, childUpdateDto);
     }
 
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Удаление информации о ребенке")
+
+    @Operation(summary = "Удалить информацию о ребенке")
     @Override
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return childService.deleteById(id);
     }
 
-    @GetMapping("/get/all")
-    @Operation(summary = "Получение списка всех детей")
+
+    @Operation(summary = "Получить список всех детей")
     @Override
     public List<ChildDto> allList(int page, int size) {
         return childService.getAll(page, size);
     }
 
-    @GetMapping("/get/{id}")
-    @Operation(summary = "Поиск ребенка по id")
+
+    @Operation(summary = "Найти ребенка по ID")
     @Override
     public ChildDto findById(@PathVariable Long id) {
         return childService.findByIdAndReturnDto(id);

@@ -22,37 +22,37 @@ public class TeacherController implements CRUDOperations<TeacherDto, TeacherCrea
         this.teacherService = teacherService;
     }
 
-    @PostMapping("/create")
+
     @Operation(summary = "Создание учителя")
     @Override
     public TeacherDto create(@RequestBody TeacherCreateDto teacherCreateDto) {
         return teacherService.create(teacherCreateDto);
     }
 
-    @PutMapping("/update/{teacherId}")
-    @Operation(summary = "Обновление учителя")
+
+    @Operation(summary = "Обновить учителя")
     @Override
     public TeacherDto update(@PathVariable Long teacherId, TeacherUpdateDto teacherUpdateDto) {
         return teacherService.update(teacherId, teacherUpdateDto);
     }
 
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Удаление учителя")
+
+    @Operation(summary = "Удалить учителя")
     @Override
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return teacherService.delete(id);
     }
 
-    @GetMapping("/get/all")
-    @Operation(summary = "Получение списка всех учителей по страницам")
+
+    @Operation(summary = "Получить список учителей")
     @Override
     public List<TeacherDto> allList(int page, int size) {
         return teacherService.getAllTeachers(page, size);
     }
 
 
-    @GetMapping("/get/{teacherId}")
-    @Operation(summary = "Поиск учителя по id")
+
+    @Operation(summary = "Найти учителя по ID")
     @Override
     public TeacherDto findById(@PathVariable Long teacherId) {
         return teacherService.findByIdAndReturnDto(teacherId);
