@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/contact")
 public class ContactController implements CRUDOperations<ContactDto, ContactCreateDto, ContactUpdateDto> {
 
     private final ContactService contactService;
