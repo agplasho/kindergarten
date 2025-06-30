@@ -26,13 +26,13 @@ public class GroupServiceImpl implements GroupService {
     private final GroupRepo groupRepo;
     private final AgeGroupService ageGroupService;
     private final TeacherService teacherService;
-    private final ChildService childService;
 
-    public GroupServiceImpl(GroupRepo groupRepo, AgeGroupService ageGroupService, TeacherService teacherService, ChildService childService) {
+
+    public GroupServiceImpl(GroupRepo groupRepo, AgeGroupService ageGroupService, TeacherService teacherService) {
         this.groupRepo = groupRepo;
         this.ageGroupService = ageGroupService;
         this.teacherService = teacherService;
-        this.childService = childService;
+
     }
 
 
@@ -96,11 +96,6 @@ public class GroupServiceImpl implements GroupService {
         return GroupMapper.INSTANCE.groupCreateDto(group);
     }
 
-    @Override
-    public GroupDto addChildToGroup(Long groupId, Long childId) {
-        Child child = childService.findById(childId);
-        Group group = groupRepo.findById(groupId).orElseThrow(()-> new RuntimeException("Группа не найдена"));
-        child = childService.addChildToGroup (groupId);
-        return null;
     }
-}
+
+

@@ -15,6 +15,6 @@ public interface ParentRepo extends JpaRepository<Parent,Long> {
     List<Parent> findAllByIds(List<Long> parentsIds);
 
 
-    @Query ("select new kg.mega.kindergarten.models.dtos.ParentDto (u.id, u.firstName, u.lastName, u.patronymic, u.role, u.contact, u.active) from Parent u")
+    @Query ("select new kg.mega.kindergarten.models.dtos.ParentDto (u.id, u.firstName, u.lastName,  u.role, u.contact, u.active) from Parent u")
     List<ParentDto> findAllParents(Pageable pageable);
 }

@@ -22,5 +22,5 @@ public interface ChildService {
 
     ChildDto findByIdAndReturnDto(Long id);
 
-    Child addChildToGroup(Long groupId);
+    Child addChildToGroup(Long groupId, Long childId);
 }

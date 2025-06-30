@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface TeacherRepo extends JpaRepository<Teacher, Long> {
-    @Query("select new kg.mega.kindergarten.models.dtos.TeacherDto (u.id, u.position, u.dateOfBirth, u.contact, u.firstName, u.lastName, u.patronymic, u.active)from Teacher u")
+    @Query("select new kg.mega.kindergarten.models.dtos.TeacherDto (u.id, u.position, u.dateOfBirth, u.contact, u.firstName, u.lastName, u.active)from Teacher u")
     List<TeacherDto> findAllTeachers(Pageable pageable);
 }

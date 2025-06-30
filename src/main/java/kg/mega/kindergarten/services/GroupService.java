@@ -26,5 +26,5 @@ public interface GroupService {
 
     GroupDto addAssistantToGroup(Long groupId, Long assistandId);
 
-    GroupDto addChildToGroup(Long groupId, Long childId);
+
 }

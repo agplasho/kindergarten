@@ -12,6 +12,7 @@ import kg.mega.kindergarten.repositories.ChildRepo;
 import kg.mega.kindergarten.services.ChildService;
 import kg.mega.kindergarten.services.GroupService;
 import kg.mega.kindergarten.services.ParentService;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -69,8 +70,8 @@ public class ChildServiceImpl implements ChildService{
     @Override
     public List<ChildDto> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        List<Child> childs = childRepo.findAll(pageable).getContent();
-        return ChildMapper.INSTANCE.childToChildDtoList(childs);
+        List<Child> children = childRepo.findAll(pageable).getContent();
+        return ChildMapper.INSTANCE.childToChildDtoList(children);
     }
 
     @Override
@@ -80,9 +81,11 @@ public class ChildServiceImpl implements ChildService{
     }
 
     @Override
-    public Child addChildToGroup(Long groupId) {
+    public Child addChildToGroup(Long groupId, Long childId) {
         Group group = groupService.findById(groupId);
-        return null;
+        Child child = childRepo.findById(childId).orElseThrow(() -> new RuntimeException("Ребенок не найден"));
+        child.setGroup(group);
+        return childRepo.save(child);
     }
 
 

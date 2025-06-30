@@ -6,6 +6,7 @@ public record ParentCreateDto(
         String firstName,
         String lastName,
         ParentRole parentRole,
-        Long contactId
+        Long contactId,
+        boolean active
 ) {
 }

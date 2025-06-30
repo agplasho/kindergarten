@@ -1,6 +1,7 @@
 package kg.mega.kindergarten.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import kg.mega.kindergarten.mappers.TeacherMapper;
 import kg.mega.kindergarten.models.dtos.TeacherCreateDto;
 import kg.mega.kindergarten.models.dtos.TeacherDto;
@@ -25,7 +26,7 @@ public class TeacherController implements CRUDOperations<TeacherDto, TeacherCrea
 
     @Operation(summary = "Создание учителя")
     @Override
-    public TeacherDto create(@RequestBody TeacherCreateDto teacherCreateDto) {
+    public TeacherDto create(@RequestBody @Valid TeacherCreateDto teacherCreateDto) {
         return teacherService.create(teacherCreateDto);
     }
 

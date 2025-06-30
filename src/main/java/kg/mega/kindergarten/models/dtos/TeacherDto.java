@@ -7,11 +7,11 @@ import java.time.LocalDate;
 
 public record TeacherDto(
         Long id,
+        TeacherPosition position,
+        LocalDate dateOfBirth,
+        Contact contact,
         String firstName,
         String lastName,
-        LocalDate dateOfBirth,
-        TeacherPosition position,
-        Contact contact,
         boolean active
 
 ) {

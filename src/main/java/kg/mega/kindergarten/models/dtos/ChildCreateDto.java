@@ -25,7 +25,8 @@ public record ChildCreateDto(
         @NotNull
         Long groupId,
         @NotNull
-        List<Long> parentsIds
+        List<Long> parentsIds,
+        boolean active
 
 
 ) {

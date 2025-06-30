@@ -21,4 +21,37 @@ public class Parent extends Human{
     Contact contact;
     @Enumerated(EnumType.STRING)
     ParentRole role;
+    boolean active = true;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public ParentRole getRole() {
+        return role;
+    }
+
+    public void setRole(ParentRole role) {
+        this.role = role;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

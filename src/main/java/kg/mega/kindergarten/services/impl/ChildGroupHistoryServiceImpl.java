@@ -36,8 +36,8 @@ public class ChildGroupHistoryServiceImpl implements ChildGroupHistoryService {
 
     @Override
     public ChildGroupHistoryDto create(ChildGroupHistoryCreateDto childGroupHistoryCreateDto) {
-        Child child = childService.findChildById (childGroupHistoryCreateDto.child());
-        Group group = groupService.findGroupById (childGroupHistoryCreateDto.group());
+        Child child = childService.findById (childGroupHistoryCreateDto.child());
+        Group group = groupService.findById (childGroupHistoryCreateDto.group());
         ChildGroupHistory childGroupHistory = ChildGroupHistoryMapper.INSTANCE.childGroupHistoryCreateDtoToChildGroupHistory(childGroupHistoryCreateDto,child,group);
         childGroupHistory = childGroupHistoryRepo.save(childGroupHistory);
         return ChildGroupHistoryMapper.INSTANCE.childGroupHistoryToChildGroupHistoryDto(childGroupHistory);
@@ -45,8 +45,8 @@ public class ChildGroupHistoryServiceImpl implements ChildGroupHistoryService {
 
     @Override
     public ChildGroupHistoryDto update(Long id, ChildGroupHistoryUpdateDto updatedDto) {
-        Child child = childService.findChildById (updatedDto.child());
-        Group group = groupService.findGroupById (updatedDto.group());
+        Child child = childService.findById (updatedDto.child());
+        Group group = groupService.findById (updatedDto.group());
         ChildGroupHistory childGroupHistory = childGroupHistoryRepo.findById(id).orElse(null);
         childGroupHistory = ChildGroupHistoryMapper.INSTANCE.childGroupHistoryUpdateDtoToChildGroupHistory(updatedDto, child,group);
         childGroupHistory = childGroupHistoryRepo.save(childGroupHistory);

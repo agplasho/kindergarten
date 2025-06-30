@@ -69,10 +69,5 @@ public class GroupController implements CRUDOperations<GroupDto, GroupCreateDto,
         return groupService.addAssistantToGroup(groupId, assistandId);
     }
 
-
-    @Operation(summary = "Добавить ребенка в группу")
-    public GroupDto addChildToGroup(Long groupId, Long childId) {
-        return groupService.addChildToGroup(groupId, childId);
-    }
 }
 

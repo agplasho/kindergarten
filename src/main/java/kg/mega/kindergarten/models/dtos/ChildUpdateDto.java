@@ -9,5 +9,6 @@ public record ChildUpdateDto(
         String patronymic,
         LocalDate dateOfBirth,
         Long groupId,
-        List<Long> parentsIds) {
+        List<Long> parentsIds,
+        boolean active) {
 }
